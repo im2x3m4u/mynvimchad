@@ -1,0 +1,40 @@
+{
+  "name": "vue-vscode-snippets",
+  "engines": {
+    "vscode": "^1.14.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": "vue",
+        "path": "./snippets/vue.json"
+      },
+      {
+        "language": [
+          "html",
+          "vue",
+          "vue-html"
+        ],
+        "path": "./snippets/vue-template.json"
+      },
+      {
+        "language": [
+          "vue",
+          "vue-html"
+        ],
+        "path": "./snippets/quasar.json"
+      },
+      {
+        "language": [
+          "vue",
+          "vue-html"
+        ],
+        "path": "./snippets/vuetify.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/vue-script.json"
+      }
+    ]
+  }
+}
