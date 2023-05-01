@@ -114,9 +114,10 @@ local mappings = {
     --     "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     --     "Buffers",
     -- },
+    --  
     ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-    ["w"] = { "<cmd>wall!<CR>", "Save" },
-    ["q"] = { "<cmd>qall!<CR>", "Quit" },
+    ["w"] = { "<cmd>wall!<CR>", "Save All" },
+    ["q"] = { "<cmd>qall<CR>", "Quit" },
     ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
     ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
     -- ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
@@ -129,11 +130,11 @@ local mappings = {
         end,
         "Coment line",
     },
-    ["m"] = {
-        name = "Markdown",
-        p = { "<cmd>MarkdownPreview<cr>", "Preview" },
-        s = { "<cmd>MarkdownPreviewStop<cr>", "Stop Preview" },
-    },
+    -- ["m"] = {
+    --     name = "Markdown",
+    --     p = { "<cmd>MarkdownPreview<cr>", "Preview" },
+    --     s = { "<cmd>MarkdownPreviewStop<cr>", "Stop Preview" },
+    -- },
     b = { name = "Buffers" },
     g = {
         name = "Git",

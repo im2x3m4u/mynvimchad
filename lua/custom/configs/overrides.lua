@@ -8,8 +8,8 @@ M.treesitter = {
         "css",
         "javascript",
         "typescript",
-        "tsx",
-        -- "c",
+        "php",
+        "python",
         "markdown",
         "markdown_inline",
     },
@@ -132,4 +132,7 @@ M.nvimtree = {
     },
 }
 
+M.telescope =  {
+  extensions_list = { "themes", "terms", "file_browser" },
+}
 return M

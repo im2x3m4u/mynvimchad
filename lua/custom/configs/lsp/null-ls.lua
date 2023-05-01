@@ -11,7 +11,42 @@ local diagnostics = null_ls.builtins.diagnostics
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local sources = {
-  formatting.stylua,
+
+    -- webdev stuff
+    formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast!
+    -- formatting.prettier.with { filetypes = { "html", "markdown", "css" } }, -- so prettier works only on these filetypes
+    formatting.prettierd.with {
+        filetypes = {
+            "javascript",
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
+            "vue",
+            "css",
+            "scss",
+            "less",
+            "html",
+            "json",
+            "jsonc",
+            "yaml",
+            "markdown",
+            "markdown.mdx",
+            "graphql",
+            "handlebars",
+        },
+    },
+
+    -- Lua
+    formatting.stylua,
+
+    -- cpp
+    formatting.clang_format,
+    
+    formatting.blade_formatter,
+    formatting.phpcsfixer,
+    formatting.autopep8,
+    formatting.djlint,
+    formatting.sql_formatter,
 }
 local ensure_installed = {}
 
@@ -51,19 +86,6 @@ if run == 1 then
 		debug = false,
 		ensure_installed = ensure_installed,
 		sources = sources,
-		--sources = {
-		--formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
-		--formatting.prettier,
-		-- formatting.prettierd,
-		-- formatting.black.with({ extra_args = { "--fast" } }),
-		-- formatting.stylua,
-		-- formatting.eslint_d,
-		-- formatting.google_java_format,
-		-- formatting.phpcbf,
-		-- formatting.clang_format,
-		-- diagnostics.flake8
-		-- diagnostics.eslint_d,
-		--},
 
 		on_attach = function(client, bufnr)
 			--if client.resolved_capabilities.document_formatting then

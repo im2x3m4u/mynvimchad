@@ -14,7 +14,7 @@ M.general = {
     -- },
 
     i = {
-        ["<c-v>"] = { "<c-r>+", " ", opts = { nowait = true } },
+        ["<C-p>"] = { "<c-r>+", " ", opts = { nowait = true } },
         ["<S-Down>"] = { "<cmd>t.<cr>", " ", opts = { nowait = true } },
         ["<M-Down>"] = { "<cmd>m+<cr>", " ", opts = { nowait = true } },
         ["<S-Up>"] = { "<cmd>t -1<cr>", " ", opts = { nowait = true } },
@@ -23,17 +23,17 @@ M.general = {
         ["<C-f>"] = { "<cmd>lua vim.lsp.buf.format{async=true}<cr>", " ", opts = { nowait = true } },
     },
     v = {
+        ["<leader>v"] = { '"+p', " ", opts = { nowait = true } },
         ["<A-j>"] = { ":m .+1<CR>==", " ", opts = { nowait = true } },
         ["<A-k>"] = { ":m .-2<CR>==", " ", opts = { nowait = true } },
         ["p"] = { '"_dP', " ", opts = { nowait = true } },
-        ["<c-v>"] = { '"+p', " ", opts = { nowait = true } },
         ["J"] = { ":move '>+1<CR>gv-gv", " ", opts = { nowait = true } },
         ["K"] = { ":move '<-2<CR>gv-gv", " ", opts = { nowait = true } },
         ["<A-j>"] = { ":move '>+1<CR>gv-gv", " ", opts = { nowait = true } },
         ["<A-k>"] = { ":move '<-2<CR>gv-gv", " ", opts = { nowait = true } },
     },
     n = {
-        ["<C-v>"] = { '"+p', "paste clipboard ", opts = { nowait = true } },
+        ["<leader>v"] = { '"+p', "paste clipboard ", opts = { nowait = true } },
         ["<S-Down>"] = { "<cmd>t.<cr>", " ", opts = { nowait = true } },
         ["<S-Up>"] = { "<cmd>t -1<cr>", " ", opts = { nowait = true } },
         ["<M-J>"] = { "<cmd>t.<cr>", " ", opts = { nowait = true } },
@@ -90,6 +90,8 @@ M.whichkey = {
     n = {
         ["<leader>o"] = { "<cmd> NvimTreeFocus <CR>", "Open File Explorer" },
         ["<leader>z"] = { "<cmd> Telescope themes <CR>", "select themes" },
+        ["<leader>f."] = { "<cmd> Telescope file_browser path=%:p:h select_buffer=true grouped=true<CR>", "Explore current buffer" },
+        ["<leader>fe"] = { "<cmd> Telescope file_browser grouped=true<CR>", "Explore current project" },
     },
 }
 
