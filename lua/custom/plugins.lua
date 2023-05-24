@@ -342,8 +342,7 @@ local plugins = {
     "nvim-telescope/telescope.nvim",
     opts = overrides.telescope,
   },
-
-  -- Install a plugin
+  { "gbrlsnchs/telescope-lsp-handlers.nvim", lazy = false, dependencies = "nvim-telescope/telescope.nvim" },
   { "HiPhish/nvim-ts-rainbow2", lazy = true, event = "BufRead" },
   {
     "ur4ltz/surround.nvim",
@@ -356,7 +355,7 @@ local plugins = {
       }
     end,
   },
-  -- {
+
   --     "RRethy/vim-illuminate",
   --     disable = true,
   --     lazy = true,
@@ -368,7 +367,7 @@ local plugins = {
   --             modes_denylist = { "i" },
   --             providers = {
   --                 --[[ "lsp", ]]
-  --                 "regex",
+  --                 "regex",plugi
   --                 "treesitter",
   --             },
   --             filetypes_denylist = {
@@ -452,23 +451,20 @@ local plugins = {
       require "custom.configs.hlslens"
     end,
   },
+  { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = false },
   {
-    "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-  },
-    {
-    'jvaverka/pomodoro.nvim',
+    "jvaverka/pomodoro.nvim",
     lazy = false,
-    dependencies = 'MunifTanjim/nui.nvim',
+    dependencies = "MunifTanjim/nui.nvim",
     config = function()
-        require('pomodoro').setup({
-            time_work = 25,
-            time_break_short = 5,
-            time_break_long = 20,
-            timers_to_long_break = 4
-        })
-    end
-},
+      require("pomodoro").setup {
+        time_work = 25,
+        time_break_short = 5,
+        time_break_long = 20,
+        timers_to_long_break = 4,
+      }
+    end,
+  },
   -- To make a plugin not be loaded
   -- {
   --   "NvChad/nvim-colorizer.lua",
@@ -500,31 +496,31 @@ local plugins = {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-      {
-        -- snippet plugin
-        "L3MON4D3/LuaSnip",
-        dependencies = "rafamadriz/friendly-snippets",
-        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-        config = function(_, opts)
-          require("plugins.configs.others").luasnip(opts)
-        end,
-      },
+      -- {
+      --     -- snippet plugin
+      --     "L3MON4D3/LuaSnip",
+      --     dependencies = "rafamadriz/friendly-snippets",
+      --     opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+      --     config = function(_, opts)
+      --         require("plugins.configs.others").luasnip(opts)
+      --     end,
+      -- },
 
       -- autopairing of (){}[] etc
-      {
-        "windwp/nvim-autopairs",
-        opts = {
-          fast_wrap = {},
-          disable_filetype = { "TelescopePrompt", "vim" },
-        },
-        config = function(_, opts)
-          require("nvim-autopairs").setup(opts)
-
-          -- setup cmp for autopairs
-          local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-          require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
-        end,
-      },
+      -- {
+      --     "windwp/nvim-autopairs",
+      --     opts = {
+      --         fast_wrap = {},
+      --         disable_filetype = { "TelescopePrompt", "vim" },
+      --     },
+      --     config = function(_, opts)
+      --         require("nvim-autopairs").setup(opts)
+      --
+      --         -- setup cmp for autopairs
+      --         local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+      --         require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+      --     end,
+      -- },
 
       {
         "tzachar/cmp-tabnine",
@@ -633,17 +629,51 @@ local plugins = {
       require "custom.configs.persisted"
     end,
   },
+  { "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" },
   {
-    "phaazon/hop.nvim",
+    "kevinhwang91/nvim-ufo",
     lazy = true,
-    cmd = { "HopWord", "HopLine", "HopChar1", "HopChar1CurrentLine" },
+    dependencies = "kevinhwang91/promise-async",
     event = "BufRead",
     config = function()
-      require("hop").setup {
-        { keys = "qwertyuiopasdfghjklzxcvbnm" },
+      require("ufo").setup {
+        -- provider_selector = function(bufnr, filetype, buftype)
+        --     return {'treesitter', 'indent'}
+        -- end
       }
+      vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+      vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+      vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
+      vim.keymap.set("n", "zm", require("ufo").closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
+      vim.keymap.set("n", "K", function()
+        local winid = require("ufo").peekFoldedLinesUnderCursor()
+        if not winid then
+          -- choose one of coc.nvim and nvim lsp
+          vim.fn.CocActionAsync "definitionHover" -- coc.nvim
+          vim.lsp.buf.hover()
+        end
+      end)
     end,
   },
+  {
+    "ggandor/leap.nvim",
+    lazy = true,
+    event = "BufRead",
+    config = function()
+      require("leap").add_default_mappings()
+    end,
+  },
+  -- {
+  --     "phaazon/hop.nvim",
+  --     lazy = true,
+  --     cmd = { "HopWord", "HopLine", "HopChar1", "HopChar1CurrentLine" },
+  --     event = "BufRead",
+  --     config = function()
+  --         require("hop").setup {
+  --             { keys = "qwertyuiopasdfghjklzxcvbnm" },
+  --         }
+  --     end,
+  -- },
   -- for live server html,css,js
   liveserver,
   -- for multi cursor select

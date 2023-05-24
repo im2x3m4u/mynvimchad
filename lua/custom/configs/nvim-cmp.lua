@@ -6,8 +6,9 @@ local types = require "cmp.types"
 local icons = require "custom.icons"
 
 local function deprioritize_emmet(entry, _)
-  local kinds = types.lsp.CompletionItemKind
-  if kinds[entry:get_kind()] == "Snippet" then
+  -- local kinds = types.lsp.CompletionItemKind
+  -- if kinds[entry:get_kind()] == "Snippet" then
+  if entry:get_kind() == types.lsp.CompletionItemKind.Snippet then
     local name = vim.split(entry.source:get_debug_name(), ":")[2]
     if name == "emmet_ls" then
       return false
@@ -83,7 +84,7 @@ return {
       cmp.config.compare.offset,
       cmp.config.compare.exact,
       cmp.config.compare.score,
-      -- cmp.config.compare.recently_used,
+      cmp.config.compare.recently_used,
       cmp.config.compare.locality,
       -- aux_cmp.kind_compare,
       aux_cmp.source_compare,
@@ -97,20 +98,21 @@ return {
   sources = cmp.config.sources {
     {
       name = "nvim_lsp",
-      priority = 200,
+      priority = 300,
       filter = deprioritize_emmet,
     },
-    { name = "luasnip", priority = 750, filter = deprioritize_snippet },
+    -- { name = "luasnip", priority = 750, filter = deprioritize_snippet },
+    { name = "luasnip", priority = 1500},
     {
       name = "buffer",
-      priority = 500,
+      priority = 200,
       get_bufnrs = function()
         return vim.api.nvim_list_bufs()
       end,
     },
-    { name = "path", priority = 300 },
+    { name = "path", priority = 400 },
     { name = "nvim_lua", priority = 100 },
-    { name = "cmp_tabnine", priority = 400 },
+    { name = "cmp_tabnine", priority = 500 },
   },
   formatting = {
     fields = { "kind", "abbr", "menu" },

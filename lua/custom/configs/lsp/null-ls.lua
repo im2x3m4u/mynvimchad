@@ -17,7 +17,7 @@ local sources = {
     -- formatting.prettier.with { filetypes = { "html", "markdown", "css" } }, -- so prettier works only on these filetypes
     formatting.prettierd.with {
         filetypes = {
-            "javascript",
+            -- "javascript",
             "javascriptreact",
             "typescript",
             "typescriptreact",

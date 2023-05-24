@@ -90,8 +90,6 @@ M.whichkey = {
     n = {
         ["<leader>o"] = { "<cmd> NvimTreeFocus <CR>", "Open File Explorer" },
         ["<leader>z"] = { "<cmd> Telescope themes <CR>", "select themes" },
-        ["<leader>f."] = { "<cmd> Telescope file_browser path=%:p:h select_buffer=true grouped=true<CR>", "Explore current buffer" },
-        ["<leader>fe"] = { "<cmd> Telescope file_browser grouped=true<CR>", "Explore current project" },
     },
 }
 
