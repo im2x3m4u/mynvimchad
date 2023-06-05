@@ -82,7 +82,8 @@ M.nvimtree = {
         -- ["<C-n>"] = { "<cmd> NvimTreeToggle <CR>", "toggle nvimtree" },
 
         -- focus
-        ["<leader>e"] = { "<cmd> NvimTreeToggle <CR>", "focus nvimtree" },
+        -- ["<leader>e"] = { "<cmd> NvimTreeToggle <CR>", "focus nvimtree" },
+        -- ["<leader>e"] = { "<cmd> Neotree position=current dir=%:p:h:h reveal_file=%:p <CR>", "focus file tree" },
     },
 }
 -- custom which key disini

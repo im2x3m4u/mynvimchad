@@ -112,7 +112,7 @@ return {
     },
     { name = "path", priority = 400 },
     { name = "nvim_lua", priority = 100 },
-    { name = "cmp_tabnine", priority = 500 },
+    -- { name = "cmp_tabnine", priority = 500 },
   },
   formatting = {
     fields = { "kind", "abbr", "menu" },

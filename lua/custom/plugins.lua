@@ -332,11 +332,61 @@ local plugins = {
     opts = overrides.treesitter,
   },
 
+  -- {
+  --   "nvim-tree/nvim-tree.lua",
+  --   lazy = true,
+  --   priority = 1500,
+  --   opts = overrides.nvimtree,
+  -- },
   {
-    "nvim-tree/nvim-tree.lua",
-    lazy = false,
-    priority = 1500,
-    opts = overrides.nvimtree,
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    keys = {
+      { "<leader>ft", "<cmd>NeoTreeRevealToggle <cr>", desc = "Toggle NeoTree" },
+      -- { "<leader>e", "<cmd>Neotree position=float dir=%:p:h:h reveal_file=%:p toggle=true<cr>", desc = "Open NeoTree" },
+      { "<leader>e", "<cmd>NeoTreeFloatToggle<cr>", desc = "Open NeoTree" },
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require("neo-tree").setup {
+        sources = {
+          "filesystem",
+          "buffers",
+          "git_status",
+          "document_symbols",
+        },
+        close_if_last_window = true,
+        window = {
+          position = "right",
+        },
+        filesystem = {
+          filtered_items = {
+            hide_dotfiles = false,
+            hide_gitignored = false,
+            hide_by_name = {
+              "node_modules",
+            },
+            never_show = {
+              ".DS_Store",
+              "thumbs.db",
+            },
+          },
+        },
+        event_handlers = {
+          {
+            event = "file_opened",
+            handler = function()
+              --auto close
+              require("neo-tree").close_all()
+            end,
+          },
+        },
+      }
+    end,
   },
   {
     "nvim-telescope/telescope.nvim",

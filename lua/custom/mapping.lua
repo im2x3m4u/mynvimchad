@@ -286,12 +286,12 @@ api.map.bulk_register {
     {
         mode = { "n" },
         lhs = "<leader>fr",
-        rhs = "<cmd>lua require('telescope.builtin').registers()<CR>",
+        rhs = "<cmd>lua require('telescope.builtin').resume()<CR>",
         -- rhs = function()
         --     require("telescope.builtin").oldfiles()
         -- end,
         options = { silent = true },
-        description = "Find register, paste the content.",
+        description = "Resume Last Find",
     },
     -- {
     --     mode = { "n" },
@@ -381,9 +381,16 @@ api.map.bulk_register {
         description = "copy to register a",
     },
     {
+        mode = { "n", "i" },
+        lhs = "<C-c>",
+        rhs = 'yy',
+        options = { silent = true },
+        description = "copy a line",
+    },
+    {
         mode = { "n", "v" },
         lhs = "<leader>v",
-        rhs = '"ap',
+        rhs = '"0p',
         options = { silent = true },
         description = "paste from register a",
     },
