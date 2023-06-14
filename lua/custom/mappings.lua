@@ -89,7 +89,7 @@ M.nvimtree = {
 -- custom which key disini
 M.whichkey = {
     n = {
-        ["<leader>o"] = { "<cmd> NvimTreeFocus <CR>", "Open File Explorer" },
+        -- ["<leader>o"] = { "<cmd> NvimTreeFocus <CR>", "Open File Explorer" },
         ["<leader>z"] = { "<cmd> Telescope themes <CR>", "select themes" },
     },
 }

@@ -636,6 +636,7 @@ local plugins = {
   {
     "j-hui/fidget.nvim",
     event = "BufRead",
+    tag = "legacy",
     dependencies = {
       "neovim/nvim-lspconfig",
     },
@@ -713,6 +714,15 @@ local plugins = {
       require("leap").add_default_mappings()
     end,
   },
+    {
+ "folke/trouble.nvim",
+ dependencies = { "nvim-tree/nvim-web-devicons" },
+ opts = {
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
+  -- refer to the configuration section below
+ },
+},
   -- {
   --     "phaazon/hop.nvim",
   --     lazy = true,
