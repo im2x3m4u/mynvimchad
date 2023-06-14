@@ -23,7 +23,7 @@ M.general = {
         ["<C-f>"] = { "<cmd>lua vim.lsp.buf.format{async=true}<cr>", " ", opts = { nowait = true } },
     },
     v = {
-        ["<leader>v"] = { '"+p', " ", opts = { nowait = true } },
+        -- ["<leader>v"] = { '"+p', " ", opts = { nowait = true } },
         ["<A-j>"] = { ":m .+1<CR>==", " ", opts = { nowait = true } },
         ["<A-k>"] = { ":m .-2<CR>==", " ", opts = { nowait = true } },
         ["p"] = { '"_dP', " ", opts = { nowait = true } },
@@ -33,7 +33,7 @@ M.general = {
         ["<A-k>"] = { ":move '<-2<CR>gv-gv", " ", opts = { nowait = true } },
     },
     n = {
-        ["<leader>v"] = { '"+p', "paste clipboard ", opts = { nowait = true } },
+        -- ["<leader>v"] = { '"+p', "paste clipboard ", opts = { nowait = true } },
         ["<S-Down>"] = { "<cmd>t.<cr>", " ", opts = { nowait = true } },
         ["<S-Up>"] = { "<cmd>t -1<cr>", " ", opts = { nowait = true } },
         ["<M-J>"] = { "<cmd>t.<cr>", " ", opts = { nowait = true } },

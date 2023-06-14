@@ -392,7 +392,7 @@ api.map.bulk_register {
         lhs = "<leader>v",
         rhs = '"0p',
         options = { silent = true },
-        description = "paste from register a",
+        description = "paste from register",
     },
     {
         mode = { "n", "v" },
