@@ -112,6 +112,7 @@ return {
     },
     { name = "path", priority = 400 },
     { name = "nvim_lua", priority = 100 },
+    { name = "codeium", priority = 500 },
     -- { name = "cmp_tabnine", priority = 500 },
   },
   formatting = {
@@ -121,6 +122,10 @@ return {
       if entry.source.name == "cmp_tabnine" then
         vim_item.kind = icons.misc.Robot
         vim_item.kind_hl_group = "CmpItemKindTabnine"
+      end
+      if entry.source.name == "codeium" then
+        vim_item.kind = icons.misc.Robot
+        vim_item.kind_hl_group = "CmpItemKindCodium"
       end
       if entry.source.name == "copilot" then
         vim_item.kind = icons.git.Octoface

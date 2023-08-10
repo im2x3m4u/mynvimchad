@@ -155,6 +155,10 @@
       },
       {
         "language": "vue",
+        "path": "./vue/snippets/vuetify.json"
+      },
+      {
+        "language": "vue",
         "path": "./B5-Snippets/snippets/bootstrap.json"
       },
       {

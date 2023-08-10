@@ -8,19 +8,20 @@ M.disabled = {
         ["<leader>b"] = "",
     },
 }
+
 M.general = {
     -- n = {
     --   [";"] = { ":", "enter command mode", opts = { nowait = true } },
     -- },
 
     i = {
-        ["<C-p>"] = { "<c-r>+", " ", opts = { nowait = true } },
-        ["<S-Down>"] = { "<cmd>t.<cr>", " ", opts = { nowait = true } },
+        -- ["<C-p>"] = { "<c-r>+", " ", opts = { nowait = true } },
+        -- ["<S-Down>"] = { "<cmd>t.<cr>", " ", opts = { nowait = true } },
         ["<M-Down>"] = { "<cmd>m+<cr>", " ", opts = { nowait = true } },
-        ["<S-Up>"] = { "<cmd>t -1<cr>", " ", opts = { nowait = true } },
+        -- ["<S-Up>"] = { "<cmd>t -1<cr>", " ", opts = { nowait = true } },
         ["<M-Up>"] = { "<cmd>m-2<cr>", " ", opts = { nowait = true } },
-        ["<C-l>"] = { "<cmd>LiveServer start<cr><cr>", " ", opts = { nowait = true } },
-        ["<C-f>"] = { "<cmd>lua vim.lsp.buf.format{async=true}<cr>", " ", opts = { nowait = true } },
+        -- ["<C-l>"] = { "<cmd>LiveServer start<cr><cr>", " ", opts = { nowait = true } },
+        -- ["<C-f>"] = { "<cmd>lua vim.lsp.buf.format{async=true}<cr>", " ", opts = { nowait = true } },
     },
     v = {
         -- ["<leader>v"] = { '"+p', " ", opts = { nowait = true } },
@@ -89,7 +90,8 @@ M.nvimtree = {
 -- custom which key disini
 M.whichkey = {
     n = {
-        -- ["<leader>o"] = { "<cmd> NvimTreeFocus <CR>", "Open File Explorer" },
+        ["<leader>a"] = { "<cmd> MurenToggle <CR>", "toggle searh and replace" },
+        ["<leader>o"] = { "<cmd> Navbuddy <CR>", "open nav buddy" },
         ["<leader>z"] = { "<cmd> Telescope themes <CR>", "select themes" },
     },
 }

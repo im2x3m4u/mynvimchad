@@ -4,11 +4,11 @@ local active_debug = true
 local active_toggleterm = true
 local active_visualmulti = true
 local active_lspinstaller = false
-local active_smartsplit = true
+local active_smartsplit = false
 local active_liveserver = false
-local active_dressing = false
+local active_dressing = true
 local active_cmdline = true
-local active_coderunner = true
+local active_coderunner = false
 local active_winbar = true
 -- default variable
 local debug = {}
@@ -303,7 +303,10 @@ end
 local plugins = {
 
   -- Override plugin definition options
-
+  {
+    "lewis6991/gitsigns.nvim",
+    enabled = false,
+  },
   -- {
   --     "neovim/nvim-lspconfig",
   --     dependencies = {
@@ -474,6 +477,14 @@ local plugins = {
     end,
   },
   {
+    "LeonHeidelbach/trailblazer.nvim",
+    config = function()
+      require("trailblazer").setup {
+        -- your custom config goes here
+      }
+    end,
+  },
+  {
     "cbochs/grapple.nvim",
     lazy = true,
     event = "BufRead",
@@ -558,7 +569,7 @@ local plugins = {
 
       -- autopairing of (){}[] etc
       -- {
-      --     "windwp/nvim-autopairs",
+      --     "windwp/nvim-autopairs",        --
       --     opts = {
       --         fast_wrap = {},
       --         disable_filetype = { "TelescopePrompt", "vim" },
@@ -572,21 +583,21 @@ local plugins = {
       --     end,
       -- },
 
-      {
-        "tzachar/cmp-tabnine",
-        build = "./install.sh",
-        config = function()
-          local tabnine = require "cmp_tabnine.config"
-          tabnine:setup {
-            max_lines = 1000,
-            max_num_results = 20,
-            sort = true,
-            run_on_every_keystroke = true,
-            snippet_placeholder = "..",
-            show_prediction_strength = false,
-          } -- put your options here
-        end,
-      },
+      -- {
+      --   "tzachar/cmp-tabnine",
+      --   build = "./install.sh",
+      --   config = function()
+      --     local tabnine = require "cmp_tabnine.config"
+      --     tabnine:setup {
+      --       max_lines = 1000,
+      --       max_num_results = 20,
+      --       sort = true,
+      --       run_on_every_keystroke = true,
+      --       snippet_placeholder = "..", --
+      --       show_prediction_strength = false,
+      --     } -- put your options here
+      --   end,
+      -- },
 
       -- cmp sources plugins
       {
@@ -628,6 +639,14 @@ local plugins = {
     event = "BufRead",
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
+      {
+        "SmiteshP/nvim-navbuddy",
+        dependencies = {
+          "SmiteshP/nvim-navic",
+          "MunifTanjim/nui.nvim",
+        },
+        opts = { lsp = { auto_attach = true } },
+      },
     },
     config = function()
       require "custom.configs.lsp"
@@ -654,6 +673,26 @@ local plugins = {
     end,
   },
   {
+    "echasnovski/mini.pairs",
+    version = false,
+    config = function()
+      require("mini.pairs").setup()
+    end,
+  },
+  {
+    "echasnovski/mini.indentscope",
+    version = false,
+    config = function()
+      require("mini.indentscope").setup()
+    end,
+  },
+  {
+    "karb94/neoscroll.nvim",
+    config = function()
+      require("neoscroll").setup()
+    end,
+  },
+  {
     "nvim-treesitter/nvim-treesitter-textobjects",
     lazy = true,
     event = "BufRead",
@@ -661,6 +700,7 @@ local plugins = {
       "nvim-treesitter/nvim-treesitter",
     },
   },
+  { "nvim-treesitter/nvim-treesitter-context" },
   -- for formater linter
   {
     "jayp0521/mason-null-ls.nvim",
@@ -700,7 +740,7 @@ local plugins = {
         local winid = require("ufo").peekFoldedLinesUnderCursor()
         if not winid then
           -- choose one of coc.nvim and nvim lsp
-          vim.fn.CocActionAsync "definitionHover" -- coc.nvim
+          -- vim.fn.CocActionAsync "definitionHover" -- coc.nvim
           vim.lsp.buf.hover()
         end
       end)
@@ -714,15 +754,151 @@ local plugins = {
       require("leap").add_default_mappings()
     end,
   },
-    {
- "folke/trouble.nvim",
- dependencies = { "nvim-tree/nvim-web-devicons" },
- opts = {
-  -- your configuration comes here
-  -- or leave it empty to use the default settings
-  -- refer to the configuration section below
- },
-},
+  {
+    "ggandor/flit.nvim",
+    lazy = true,
+    event = "BufRead",
+    config = function()
+      require("flit").setup()
+    end,
+  },
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+  },
+  {
+    "ray-x/navigator.lua",
+    dependencies = {
+      { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
+      { "neovim/nvim-lspconfig" },
+      { "nvim-treesitter/nvim-treesitter" },
+    },
+    config = function()
+      require("navigator").setup {
+        mason = true,
+      }
+    end,
+  },
+  -- {
+  --   "rgzntrade/codeium.nvim",
+  --   -- "jcdickinson/codeium.nvim",
+  --   lazy = true,
+  --   event = "BufRead",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "hrsh7th/nvim-cmp",
+  --   },
+  --   config = function()
+  --     require("codeium").setup {}
+  --   end,
+  -- },
+  {
+    "Exafunction/codeium.vim",
+    event = "BufRead",
+    config = function()
+      -- Change '<C-g>' here to any keycode you like.
+      vim.keymap.set("i", "<c-c>", function()
+        return vim.fn["codeium#Accept"]()
+      end, { expr = true })
+      vim.keymap.set("i", "<c-n>", function()
+        return vim.fn["codeium#CycleCompletions"](1)
+      end, { expr = true })
+      vim.keymap.set("i", "<c-m>", function()
+        return vim.fn["codeium#CycleCompletions"](-1)
+      end, { expr = true })
+      vim.keymap.set("i", "<c-f>", function()
+        return vim.fn["codeium#Clear"]()
+      end, { expr = true })
+    end,
+  },
+  {
+    "jose-elias-alvarez/typescript.nvim",
+    event = "BufRead",
+    config = function()
+      require("typescript").setup {
+        disable_commands = false, -- prevent the plugin from creating Vim commands
+        debug = false, -- enable debug logging for commands
+        go_to_source_definition = {
+          fallback = true, -- fall back to standard LSP definition on failure
+        },
+        server = {
+          on_attach = function(client, bufnr)
+            -- your other on_attach stuff here if you have any
+            -- ...
+            vim.lsp.buf.inlay_hint(bufnr, true)
+          end,
+          settings = {
+            -- specify some or all of the following settings if you want to adjust the default behavior
+            javascript = {
+              inlayHints = {
+                includeInlayEnumMemberValueHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayVariableTypeHints = true,
+              },
+            },
+            typescript = {
+              inlayHints = {
+                includeInlayEnumMemberValueHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayVariableTypeHints = true,
+              },
+            },
+          },
+        },
+      }
+    end,
+  },
+  {
+    "AckslD/muren.nvim",
+    event = "BufRead",
+    config = true,
+  },
+  {
+    "LeonHeidelbach/trailblazer.nvim",
+    event = "BufRead",
+    config = function()
+      require("trailblazer").setup {
+        -- your custom config goes here
+      }
+    end,
+  },
+  {
+    "nvim-telescope/telescope-ui-select.nvim",
+    event = "BufRead",
+    config = function()
+      require("telescope").load_extension "ui-select"
+    end,
+  },
+  {
+    "johmsalas/text-case.nvim",
+    event = "BufRead",
+    config = function()
+      require("textcase").setup {}
+      require("telescope").load_extension "textcase"
+      vim.api.nvim_set_keymap("n", "ga.", "<cmd>TextCaseOpenTelescope<CR>", { desc = "Telescope Text Case" })
+      vim.api.nvim_set_keymap("v", "ga.", "<cmd>TextCaseOpenTelescope<CR>", { desc = "Telescope Text Case" })
+      vim.api.nvim_set_keymap(
+        "n",
+        "gaa",
+        "<cmd>TextCaseOpenTelescopeQuickChange<CR>",
+        { desc = "Telescope Quick Change" }
+      )
+      vim.api.nvim_set_keymap("n", "gai", "<cmd>TextCaseOpenTelescopeLSPChange<CR>", { desc = "Telescope LSP Change" })
+    end,
+  },
   -- {
   --     "phaazon/hop.nvim",
   --     lazy = true,

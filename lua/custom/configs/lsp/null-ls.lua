@@ -47,6 +47,7 @@ local sources = {
     formatting.autopep8,
     formatting.djlint,
     formatting.sql_formatter,
+    require("typescript.extensions.null-ls.code-actions"),
 }
 local ensure_installed = {}
 

@@ -7,7 +7,7 @@ end
 
 local volar_init_options = {
       typescript = {
-        tsdk = ''
+        tsdk = '/usr/local/lib/node_modules/typescript/lib'
       },
       languageFeatures = {
         implementation = true, -- new in @volar/vue-language-server v0.33
