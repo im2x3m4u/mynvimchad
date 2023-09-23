@@ -42,8 +42,8 @@ M.treesitter = {
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = "<c-space>",
-      node_incremental = "<c-space>",
+      init_selection = "<space><space>",
+      node_incremental = "<space><space>",
       scope_incremental = "<c-S>",
       node_decremental = "<backspace>",
     },
@@ -139,7 +139,15 @@ M.telescope = {
         telescope = require("telescope.themes").get_dropdown {},
       },
     },
+    ast_grep = {
+      command = {
+        "sg",
+        "--json=stream",
+      }, -- must have --json=stream
+      grep_open_files = false, -- search in opened files
+      lang = nil, -- string value, specify language for ast-grep `nil` for default
+    },
   },
-  extensions_list = { "themes", "terms", "fzf", "lsp_handlers" },
+  extensions_list = { "themes", "terms", "fzf", "lsp_handlers", "ast_grep" },
 }
 return M

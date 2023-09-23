@@ -67,12 +67,17 @@ require("mason-lspconfig").setup_handlers {
       -- if server_name == "lua_ls" then
       -- 	server_name = "sumneko_lua"
       -- end
+      server_name = vim.split(server_name, "@")[1]
+
+      -- volar takeover mode
+      if require("neoconf").get(server_name .. ".disable") then
+        return
+      end
+
       opts = {
         on_attach = require("custom.configs.lsp.handlers").on_attach,
         capabilities = require("custom.configs.lsp.handlers").capabilities,
       }
-
-      server_name = vim.split(server_name, "@")[1]
 
       local require_ok, conf_opts = pcall(require, "custom.configs.lsp.settings." .. server_name)
       if require_ok then

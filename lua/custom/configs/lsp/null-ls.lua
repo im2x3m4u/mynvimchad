@@ -13,14 +13,13 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local sources = {
 
     -- webdev stuff
-    formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast!
-    -- formatting.prettier.with { filetypes = { "html", "markdown", "css" } }, -- so prettier works only on these filetypes
+    formatting.deno_fmt.with { filetypes = { "javascript", "typescript" } },
     formatting.prettierd.with {
         filetypes = {
             -- "javascript",
-            "javascriptreact",
-            "typescript",
-            "typescriptreact",
+            -- "javascriptreact",
+            -- "typescript",
+            -- "typescriptreact",
             "vue",
             "css",
             "scss",

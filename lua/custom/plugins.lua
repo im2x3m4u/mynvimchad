@@ -876,6 +876,14 @@ local plugins = {
     end,
   },
   {
+    "folke/neoconf.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "Marskey/telescope-sg",
+    event = "VeryLazy",
+  },
+  {
     "nvim-telescope/telescope-ui-select.nvim",
     event = "BufRead",
     config = function()
