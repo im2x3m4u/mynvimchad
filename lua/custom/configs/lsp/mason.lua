@@ -83,6 +83,10 @@ require("mason-lspconfig").setup_handlers {
       if require_ok then
         opts = vim.tbl_deep_extend("force", conf_opts, opts)
       end
+            -- vim.print(server_name)
+      if server_name == "volar" then
+        opts.filetypes = { "vue", "typescript", "javascript" }
+      end
       lspconfig[server_name].setup(opts)
     end
   end,

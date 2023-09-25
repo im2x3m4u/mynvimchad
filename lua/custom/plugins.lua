@@ -877,7 +877,12 @@ local plugins = {
   },
   {
     "folke/neoconf.nvim",
-    event = "VeryLazy",
+    lazy = false,
+    config = function()
+      require("neoconf").setup {
+        -- your custom config goes here
+      }
+    end,
   },
   {
     "Marskey/telescope-sg",
